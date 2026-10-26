@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AnalyseWidget</class>
+ <widget class="QWidget" name="AnalyseWidget">
+  <property name="windowTitle">
+   <string>analyse</string>
+  </property>
+  <layout class="QVBoxLayout" name="layout_analyse">
+   <item>
+    <widget class="QLabel" name="lbl_analyse_placeholder">
+     <property name="text">
+      <string>Module analyse — à concevoir (squelette v1.0)</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

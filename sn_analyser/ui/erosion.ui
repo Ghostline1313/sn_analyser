@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ErosionWidget</class>
+ <widget class="QWidget" name="ErosionWidget">
+  <property name="windowTitle">
+   <string>erosion</string>
+  </property>
+  <layout class="QVBoxLayout" name="layout_erosion">
+   <item>
+    <widget class="QLabel" name="lbl_erosion_placeholder">
+     <property name="text">
+      <string>Module erosion — à concevoir (squelette v1.0)</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

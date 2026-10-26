@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ParametresWidget</class>
+ <widget class="QWidget" name="ParametresWidget">
+  <property name="windowTitle">
+   <string>parametres</string>
+  </property>
+  <layout class="QVBoxLayout" name="layout_parametres">
+   <item>
+    <widget class="QLabel" name="lbl_parametres_placeholder">
+     <property name="text">
+      <string>Module parametres — à concevoir (squelette v1.0)</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

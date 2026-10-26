@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RapportWidget</class>
+ <widget class="QWidget" name="RapportWidget">
+  <property name="windowTitle">
+   <string>rapport</string>
+  </property>
+  <layout class="QVBoxLayout" name="layout_rapport">
+   <item>
+    <widget class="QLabel" name="lbl_rapport_placeholder">
+     <property name="text">
+      <string>Module rapport — à concevoir (squelette v1.0)</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

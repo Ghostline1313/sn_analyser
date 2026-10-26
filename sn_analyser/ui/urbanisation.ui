@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UrbanisationWidget</class>
+ <widget class="QWidget" name="UrbanisationWidget">
+  <property name="windowTitle">
+   <string>urbanisation</string>
+  </property>
+  <layout class="QVBoxLayout" name="layout_urbanisation">
+   <item>
+    <widget class="QLabel" name="lbl_urbanisation_placeholder">
+     <property name="text">
+      <string>Module urbanisation — à concevoir (squelette v1.0)</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

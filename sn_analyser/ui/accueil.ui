@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AccueilWidget</class>
+ <widget class="QWidget" name="AccueilWidget">
+  <property name="windowTitle">
+   <string>SN Analyser</string>
+  </property>
+  <layout class="QVBoxLayout" name="outerLayout">
+   <property name="leftMargin"><number>0</number></property>
+   <property name="topMargin"><number>0</number></property>
+   <property name="rightMargin"><number>0</number></property>
+   <property name="bottomMargin"><number>0</number></property>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <layout class="QVBoxLayout" name="mainLayout">
+
+   <item>
+    <widget class="QLabel" name="lblTitre">
+     <property name="text">
+      <string>&lt;h2&gt;SN ANALYSER&lt;/h2&gt;</string>
+     </property>
+    </widget>
+   </item>
+
+   <!-- Zone d'étude -->
+   <item>
+    <widget class="QGroupBox" name="gbZoneEtude">
+     <property name="title">
+      <string>Zone d'étude</string>
+     </property>
+     <layout class="QVBoxLayout" name="zoneEtudeLayout">
+      <item>
+       <widget class="QLabel" name="lblNiveau">
+        <property name="text">
+         <string>Niveau :</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbNiveau">
+        <property name="toolTip">
+         <string>Choisir le niveau administratif (région, département ou commune)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblNom">
+        <property name="text">
+         <string>Nom :</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbNom">
+        <property name="toolTip">
+         <string>Choisir la région, le département ou la commune à analyser</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Période -->
+   <item>
+    <widget class="QGroupBox" name="gbPeriode">
+     <property name="title">
+      <string>Période</string>
+     </property>
+     <layout class="QHBoxLayout" name="periodeLayout">
+      <item>
+       <widget class="QLabel" name="lblDate">
+        <property name="text">
+         <string>Date :</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinAnneeFin">
+        <property name="toolTip">
+         <string>Année analysée (1984 à 2026)</string>
+        </property>
+        <property name="minimum">
+         <number>1984</number>
+        </property>
+        <property name="maximum">
+         <number>2026</number>
+        </property>
+        <property name="value">
+         <number>2026</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHauteResolution">
+        <property name="text">
+         <string>🛰️ Haute résolution (Sentinel-2 10 m)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>A partir de 2017 : images Sentinel-2 a 10 m (20 m pour les grandes zones) au lieu de Landsat 30 m. Avant 2017 ou pour les tres grandes zones, Landsat est utilise automatiquement.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Indices -->
+   <item>
+    <widget class="QGroupBox" name="gbIndices">
+     <property name="title">
+      <string>Analyse de Risque Environnemental</string>
+     </property>
+     <layout class="QVBoxLayout" name="indicesLayout">
+      <item>
+       <widget class="QCheckBox" name="chkRisqueClimatique">
+        <property name="text">
+         <string>🌍 Risque climatique</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkClimTemperature">
+        <property name="text">
+         <string>    🌡️ Température de surface (LST)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkClimSecheresse">
+        <property name="text">
+         <string>    🌧️ Sécheresse / Pluviométrie (SPI)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkRisquePollution">
+        <property name="text">
+         <string>💨 Risque de pollution</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkPolAQI">
+        <property name="text">
+         <string>    💨 Qualité de l'air (AQI composite)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkPolIndustrie">
+        <property name="text">
+         <string>    🏭 Proximité industrielle</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkRisqueDegradationTerres">
+        <property name="text">
+         <string>🌱 Risque de dégradation des terres</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkDegVegetation">
+        <property name="text">
+         <string>    🌿 Végétation (NDVI/EVI/SAVI)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkDegBrulis">
+        <property name="text">
+         <string>    🔥 Brûlis / dégradation (NBR)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkDegSolNu">
+        <property name="text">
+         <string>    🏜️ Sol nu (BSI)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkDegSalinisation">
+        <property name="text">
+         <string>    🧂 Salinisation (SI)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkRisqueHydrologique">
+        <property name="text">
+         <string>🌊 Risque hydrologique</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroZonesHumides">
+        <property name="text">
+         <string>    💧 Zones humides / plans d'eau (NDWI)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroPrecipitations">
+        <property name="text">
+         <string>    🌧️ Précipitations excessives (SPI)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroReseauHydro">
+        <property name="text">
+         <string>    🌐 Réseau hydrographique (proximité cours d'eau)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroLacs">
+        <property name="text">
+         <string>    🏞️ Lacs / plans d'eau permanents</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroErosionCotiere">
+        <property name="text">
+         <string>    🏖️ Érosion côtière (multi-dates)</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="toolTip">
+         <string>Uniquement applicable aux zones cotieres (necessite Debut != Fin).</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroRelief">
+        <property name="text">
+         <string>    ⛰️ Relief / Élévation / Pente</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>MNT Copernicus GLO-30 (30 m) : altitude, pente, relief ombre, part de zones basses et plates</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroCourbes">
+        <property name="text">
+         <string>    〰️ Courbes de niveau</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Courbes de niveau generees a partir du MNT (equidistance adaptee au denivele)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroBassins">
+        <property name="text">
+         <string>    🗺️ Bassins versants et écoulements</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>GRASS r.watershed : bassins versants, aire drainee amont, indice d humidite topographique (TCI)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkHydroSols">
+        <property name="text">
+         <string>    🟫 Type de sol</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>SoilGrids 2.0 (ISRIC, 250 m) : type de sol WRB, argile, permeabilite</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkRisqueUrbanisation">
+        <property name="text">
+         <string>🏙️ Risque lié à l'urbanisation</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkUrbArtificialisation">
+        <property name="text">
+         <string>    🏗️ Artificialisation (NDBI)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkUrbDensitePop">
+        <property name="text">
+         <string>    👥 Densité de population</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkUrbInfrastructures">
+        <property name="text">
+         <string>    🏥 Accès aux infrastructures</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkUrbEvolutionBati">
+        <property name="text">
+         <string>    📈 Évolution du bâti (multi-dates)</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkRisqueBiodiversite">
+        <property name="text">
+         <string>🌳 Risque sur la biodiversité</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkBioVegetation">
+        <property name="text">
+         <string>    🌿 Perte de végétation (NDVI/EVI/SAVI)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkBioFeux">
+        <property name="text">
+         <string>    🔥 Feux de brousse (NBR)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkBioAiresProtegees">
+        <property name="text">
+         <string>    🛡️ Proximité aires protégées</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkBioEvolutionVegetation">
+        <property name="text">
+         <string>    📉 Évolution / perte de végétation (multi-dates)</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkPollutionS5P">
+        <property name="text">
+         <string>    Pollution NO2 precise (Sentinel-5P, plus lent)</string>
+        </property>
+        <property name="toolTip">
+         <string>Par defaut, l IRE utilise Open-Meteo (rapide, ~1s) pour la pollution NO2. Cochez ceci pour utiliser en plus/a la place Sentinel-5P (satellite, plus precis mais ajoute plusieurs minutes au calcul).</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Bouton Analyser -->
+   <item>
+    <widget class="QPushButton" name="btnAnalyser">
+     <property name="text">
+      <string>Analyser</string>
+     </property>
+    </widget>
+   </item>
+
+   <item>
+    <widget class="Line" name="separateur">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+
+   <!-- Export -->
+   <item>
+    <widget class="QGroupBox" name="gbExport">
+     <property name="title">
+      <string>Exporter</string>
+     </property>
+     <layout class="QHBoxLayout" name="exportLayout">
+      <item>
+       <widget class="QPushButton" name="btnExportPDF">
+        <property name="text">
+         <string>Exporter PDF</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnExportWord">
+        <property name="text">
+         <string>Exporter Word</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+     
+      <item>
+       <spacer name="verticalSpacerFin">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+</layout>
+    </widget>
+   </widget>
+  </item>
+ </layout>
+</widget>
+<resources/>
+<connections/>
+</ui>

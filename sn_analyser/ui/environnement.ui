@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EnvironnementWidget</class>
+ <widget class="QWidget" name="EnvironnementWidget">
+  <property name="windowTitle">
+   <string>environnement</string>
+  </property>
+  <layout class="QVBoxLayout" name="layout_environnement">
+   <item>
+    <widget class="QLabel" name="lbl_environnement_placeholder">
+     <property name="text">
+      <string>Module environnement — à concevoir (squelette v1.0)</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
