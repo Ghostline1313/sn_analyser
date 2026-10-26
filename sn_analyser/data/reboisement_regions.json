@@ -1,0 +1,23 @@
+{
+  "unite": "ha",
+  "annee": 2023,
+  "indicateur": "Superficies reboisees",
+  "source": "ANSD / DEFCCS (senegal.opendataforafrica.org)",
+  "note": "PAS le Ratio Reboisement/Deboisement (disponible uniquement au niveau national dans la source) -- effort de reboisement brut par region, utilise en attenuation partielle et documentee de l'IDT.",
+  "regions": {
+    "Dakar": 164.5,
+    "Diourbel": 310.22,
+    "Fatick": 1686.07,
+    "Kaffrine": 867.89,
+    "Kaolack": 411.653,
+    "Kédougou": 585.31,
+    "Kolda": 2124.15,
+    "Louga": 333.942,
+    "Matam": 852.7,
+    "Saint-Louis": 347.52,
+    "Sédhiou": 1513.82,
+    "Tambacounda": 1063.69,
+    "Thiès": 230.85,
+    "Ziguinchor": 741.417
+  }
+}
