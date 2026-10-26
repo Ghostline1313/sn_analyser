@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+sn_analyser/temp/
+sn_analyser/_backup_*/
+*.zip
