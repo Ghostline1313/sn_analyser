@@ -165,7 +165,7 @@ class _TacheNumerisation(_QgsTask):
                 # Cache : meme zone + memes entites dans les 7 derniers jours
                 dossier_cache = os.path.join(os.path.dirname(self.prefixe), "cache")
                 os.makedirs(dossier_cache, exist_ok=True)
-                cache = os.path.join(dossier_cache, hashlib.md5(requete.encode()).hexdigest() + ".json")
+                cache = os.path.join(dossier_cache, hashlib.sha256(requete.encode()).hexdigest() + ".json")
                 data = None
                 if os.path.exists(cache) and time.time() - os.path.getmtime(cache) < 7 * 86400:
                     try:
@@ -178,8 +178,8 @@ class _TacheNumerisation(_QgsTask):
                     try:
                         with open(cache, "w", encoding="utf-8") as f:
                             json.dump(data, f)
-                    except Exception:
-                        pass
+                    except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                        pass  # nosec B110
                 if self.isCanceled():
                     raise core_num.Annulation()
                 self.setProgress(70)
@@ -221,8 +221,8 @@ class _TacheNumerisation(_QgsTask):
         for f in (mnt_large,):
             try:
                 os.remove(f)
-            except OSError:
-                pass
+            except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                pass  # nosec B110
 
     def finished(self, result):
         self.plugin._charger_numerisation(self, bool(result))
@@ -267,8 +267,8 @@ class SnAnalyser:
         for pool in getattr(self, "_pools_actifs", []) or []:
             try:
                 pool.shutdown(wait=False, cancel_futures=True)
-            except Exception:
-                pass
+            except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                pass  # nosec B110
         self._pools_actifs = []
 
         if self.dock_widget is not None:
@@ -621,8 +621,8 @@ class SnAnalyser:
                     canvas.setMapTool(precedent)
                 else:
                     canvas.unsetMapTool(outil)
-        except Exception:
-            pass
+        except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+            pass  # nosec B110
         self._outil_dessin = None
         self._outil_precedent = None
 
@@ -993,8 +993,8 @@ class SnAnalyser:
         for tache in list(getattr(self, "_taches_numerisation", []) or []):
             try:
                 tache.cancel()
-            except Exception:
-                pass
+            except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                pass  # nosec B110
         w = getattr(self, "_widget_num", None)
         if w is not None and hasattr(w, "lblEtatNumerisation"):
             w.lblEtatNumerisation.setText("\u26d4 Annulation en cours...")
@@ -1008,8 +1008,8 @@ class SnAnalyser:
         from .core import numerisation as core_num
         try:
             self._taches_numerisation.remove(tache)
-        except Exception:
-            pass
+        except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+            pass  # nosec B110
         w = getattr(self, "_widget_num", None)
         if w is not None and hasattr(w, "btnAnnulerNumerisation"):
             w.btnAnnulerNumerisation.setEnabled(bool(getattr(self, "_taches_numerisation", [])))
@@ -1050,8 +1050,8 @@ class SnAnalyser:
                     try:
                         sym.symbolLayer(0).setStrokeColor(QColor(r, g, b))
                         sym.symbolLayer(0).setStrokeWidth(0.3)
-                    except Exception:
-                        pass
+                    except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                        pass  # nosec B110
                 elif nature == "lignes":
                     sym.setColor(QColor(r, g, b))
                     sym.setWidth(0.7 if cle in ("cours_eau", "voies_ferrees", "energie") else 0.4)
@@ -1059,8 +1059,8 @@ class SnAnalyser:
                         try:
                             sym.symbolLayer(0).setPenStyle(Qt.DashLine)
                             sym.setWidth(0.6)
-                        except Exception:
-                            pass
+                        except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                            pass  # nosec B110
                 else:
                     sym.setColor(QColor(r, g, b))
                     sym.setSize(2.4)
@@ -1090,8 +1090,8 @@ class SnAnalyser:
         try:
             from qgis.core import QgsMessageLog, Qgis
             QgsMessageLog.logMessage(msg, "SN Analyser", level=Qgis.Info)
-        except Exception:
-            pass
+        except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+            pass  # nosec B110
         if not sous_groupes:
             root.removeChildNode(groupe)
         else:
@@ -1607,8 +1607,8 @@ class SnAnalyser:
                 resume["taux_croissance_urbaine"] = core_urb.taux_croissance_annuel(
                     resultats[annee_debut]["surface_ha"], res_fin["surface_ha"], annee_fin - annee_debut
                 )
-            except Exception:
-                pass
+            except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                pass  # nosec B110
 
         # Nettoyage des fichiers intermediaires volumineux (on garde les rasters classes decoupes)
         for annee, res in resultats.items():
@@ -1617,8 +1617,8 @@ class SnAnalyser:
                 if p and os.path.exists(p):
                     try:
                         os.remove(p)
-                    except OSError:
-                        pass
+                    except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                        pass  # nosec B110
 
         return resume
 
@@ -1851,8 +1851,8 @@ class SnAnalyser:
                 if p and os.path.exists(p):
                     try:
                         os.remove(p)
-                    except OSError:
-                        pass
+                    except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                        pass  # nosec B110
 
         return resume
 
@@ -2095,8 +2095,8 @@ class SnAnalyser:
                 if p and os.path.exists(p):
                     try:
                         os.remove(p)
-                    except OSError:
-                        pass
+                    except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                        pass  # nosec B110
 
         return resume
 
@@ -2424,7 +2424,7 @@ class SnAnalyser:
         cle = "%s|%s|%s|%s" % (nature, ",".join("%.4f" % c for c in bbox), annee, variante)
         dossier = os.path.join(work_dir, "cache")
         os.makedirs(dossier, exist_ok=True)
-        return os.path.join(dossier, nature + "_" + hashlib.md5(cle.encode()).hexdigest()[:16] + ext)
+        return os.path.join(dossier, nature + "_" + hashlib.sha256(cle.encode()).hexdigest()[:16] + ext)
 
     def _mnt_en_cache(self, core_rh, bbox, resolution, marge, work_dir):
         """MNT Copernicus de la zone (+ marge), conserve en cache : il ne
@@ -2438,21 +2438,30 @@ class SnAnalyser:
         return cache
 
     def _occupation_en_cache(self, core_occ, bbox, geojson_path, gt, proj, forme, work_dir, prefix):
-        import pickle
+        """Occupation du sol ESA WorldCover mise en cache (numpy .npz + JSON,
+        sans pickle)."""
+        import json
+        import numpy as np
         cache = self._chemin_cache(work_dir, "worldcover", bbox, 0,
-                                   "%s|%s" % (",".join("%.3f" % v for v in gt), forme), ext=".pkl")
-        if os.path.exists(cache):
+                                   "%s|%s" % (",".join("%.3f" % v for v in gt), forme), ext=".npz")
+        meta = cache + ".json"
+        if os.path.exists(cache) and os.path.exists(meta):
             try:
-                with open(cache, "rb") as f:
-                    return pickle.load(f)
-            except Exception:
-                pass
+                with np.load(cache, allow_pickle=False) as z:
+                    classes = z["classes"]
+                with open(meta, encoding="utf-8") as f:
+                    info = json.load(f)
+                info["classes"] = classes
+                return info
+            except Exception as exc:
+                self._log_critical("Cache WorldCover illisible, nouveau telechargement : " + str(exc))
         occ = core_occ.occupation_du_sol(bbox, geojson_path, gt, proj, forme, work_dir, prefix)
         try:
-            with open(cache, "wb") as f:
-                pickle.dump(occ, f)
-        except Exception:
-            pass
+            np.savez_compressed(cache, classes=occ["classes"])
+            with open(meta, "w", encoding="utf-8") as f:
+                json.dump({k: v for k, v in occ.items() if k != "classes"}, f)
+        except Exception as exc:
+            self._log_critical("Cache WorldCover non enregistre : " + str(exc))
         return occ
 
     def _retirer_couches_fichiers(self, prefixe_chemin):
@@ -2467,8 +2476,8 @@ class SnAnalyser:
             try:
                 if os.path.normcase(os.path.normpath(src)).startswith(cible):
                     a_retirer.append(lyr.id())
-            except Exception:
-                continue
+            except Exception:  # nosec B112 - erreur non bloquante, ignoree volontairement
+                continue  # nosec B112
         if a_retirer:
             project.removeMapLayers(a_retirer)
         root = project.layerTreeRoot()
@@ -2715,8 +2724,8 @@ class SnAnalyser:
                 import time as _t
                 try:
                     fut._sn_t0 = _t.time()
-                except Exception:
-                    pass
+                except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                    pass  # nosec B110
                 super().__setitem__(cle, fut)
         futurs = _Futurs()
         if veut_secheresse_besoin:
@@ -3493,8 +3502,8 @@ class SnAnalyser:
             if p and os.path.exists(p):
                 try:
                     os.remove(p)
-                except OSError:
-                    pass
+                except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                    pass  # nosec B110
 
         pool_api.shutdown(wait=False)
         pool_osm.shutdown(wait=False)
@@ -3742,7 +3751,7 @@ class SnAnalyser:
             if p and os.path.exists(p):
                 try:
                     os.remove(p)
-                except OSError:
-                    pass
+                except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                    pass  # nosec B110
 
         return resultat

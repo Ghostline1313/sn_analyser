@@ -2,7 +2,7 @@
 name=SN Analyser
 qgisMinimumVersion=3.22
 description=Environmental surface analysis for Senegal: environmental risk mapping, terrain, hydrography and OpenStreetMap digitizing from Sentinel-2, Landsat and open data.
-version=1.0.0
+version=1.0.1
 author=ADIOUMA FALL-Géo
 email=mouridefalltouba@gmail.com
 
@@ -21,7 +21,9 @@ tracker=https://github.com/Ghostline1313/sn_analyser/issues
 repository=https://github.com/Ghostline1313/sn_analyser
 homepage=https://github.com/Ghostline1313/sn_analyser
 
-changelog=1.0.0 (2026-10-26)
+changelog=1.0.1 (2026-10-26)
+    - Security scan fixes: HTTPS-only URL opening, SHA-256 cache keys, cache without pickle, documented non-blocking exception handlers
+    1.0.0 (2026-10-26)
     - Six independent environmental risks with per-pixel risk maps
     - Corrected Sentinel-2 (10 m) and Landsat Level-2 imagery (surface reflectance and temperature)
     - ESA WorldCover land cover for urbanization, land degradation and biodiversity
