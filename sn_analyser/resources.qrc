@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="/plugins/sn_analyser">
+    <file>icons/icon.png</file>
+    <file>icons/urban.png</file>
+    <file>icons/erosion.png</file>
+    <file>icons/environnement.png</file>
+    <file>icons/rapport.png</file>
+  </qresource>
+</RCC>

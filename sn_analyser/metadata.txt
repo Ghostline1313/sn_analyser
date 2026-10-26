@@ -1,0 +1,42 @@
+[general]
+name=SN Analyser
+qgisMinimumVersion=3.22
+description=Environmental surface analysis for Senegal: environmental risk mapping, terrain, hydrography and OpenStreetMap digitizing from Sentinel-2, Landsat and open data.
+version=1.0.0
+author=ADIOUMA FALL-Géo
+email=mouridefalltouba@gmail.com
+
+about=SN Analyser is a QGIS plugin for environmental monitoring and analysis of Senegal (regions, municipalities or a freely drawn area).
+    It computes six independent risks scored from 0 to 100, each with a per-pixel risk map: climate (land surface temperature, SPI drought), pollution (air quality index, industrial proximity, optional Sentinel-5P NO2), land degradation (NDVI, EVI, SAVI, NBR, bare soil, salinity), hydrology (wetlands, rainfall, terrain, watersheds, river network, soil types), urbanization (built-up share, density, infrastructure) and biodiversity.
+    Imagery: Sentinel-2 L2A at 10 m (2017 onwards) or Landsat Collection 2 Level-2 (1984 onwards), cloud-free annual composites.
+    Terrain and hydrology: Copernicus GLO-30 DEM, contour lines, MERIT-Hydro watersheds and rivers (mghydro.com), GRASS flow analysis, SoilGrids soil types.
+    Digitizing: automatic extraction of OpenStreetMap features within a user-defined area (transport, hydrography, land cover, boundaries, utility networks, spot heights) into a GeoPackage.
+    Automatic analysis commentary and PDF / Word report export. The user interface is in French.
+    Requires an Internet connection (public services, no account needed). PDF and Word export require the reportlab and python-docx Python libraries (python -m pip install reportlab python-docx).
+    Data sources and credits: Microsoft Planetary Computer (Sentinel-2, Landsat, ESA WorldCover, Copernicus DEM, Sentinel-5P), OpenStreetMap contributors (ODbL), MERIT-Hydro / Global Watersheds (M. Heberger), ISRIC SoilGrids, Open-Meteo, WorldPop, ANSD (RGPHAE 2023), geoBoundaries.
+    ---
+    FR : Extension QGIS d'analyse de surface de l'environnement au Sénégal : six risques environnementaux avec cartes, relief, bassins versants, réseau hydrographique, types de sol et numérisation OpenStreetMap.
+
+tracker=https://github.com/Ghostline1313/sn_analyser/issues
+repository=https://github.com/Ghostline1313/sn_analyser
+homepage=https://github.com/Ghostline1313/sn_analyser
+
+changelog=1.0.0 (2026-10-26)
+    - Six independent environmental risks with per-pixel risk maps
+    - Corrected Sentinel-2 (10 m) and Landsat Level-2 imagery (surface reflectance and temperature)
+    - ESA WorldCover land cover for urbanization, land degradation and biodiversity
+    - Terrain, contour lines, MERIT-Hydro watersheds and river network, soil types
+    - Freely drawn study area (polygon, rectangle, selection)
+    - OpenStreetMap digitizing with cancel button and cache
+    - Parallel downloads and caching for faster analyses
+
+tags=senegal,environment,environnement,risk,risque,remote sensing,teledetection,sentinel-2,landsat,ndvi,hydrology,watershed,openstreetmap,osm,digitizing,africa
+
+category=Analysis
+icon=icons/icon.png
+
+experimental=True
+deprecated=False
+
+hasProcessingProvider=no
+server=False
