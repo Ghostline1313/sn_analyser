@@ -24,6 +24,7 @@ partir de 2019). Pour les annees anterieures, aucune donnee n existe.
 import json
 import os
 import urllib.request
+from .utils import ouvrir_url
 
 import numpy as np
 import requests
@@ -63,7 +64,7 @@ def rechercher_items_no2(bbox, date_debut, date_fin, max_items=6):
         headers={"User-Agent": "SnAnalyser/1.0", "Content-Type": "application/json"},
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=30) as resp:
+    with ouvrir_url(req, timeout=30) as resp:
         data = json.loads(resp.read().decode("utf-8"))
 
     items_no2 = [f for f in data.get("features", []) if f["properties"].get("s5p:product_name") == "no2"]
@@ -159,14 +160,14 @@ def calculer_no2_moyen_zone(bbox, annee, work_dir, jours_recherche=45, max_items
             valeurs = _extraire_no2_bbox(nc_path, bbox)
             if valeurs.size > 0:
                 toutes_valeurs.append(valeurs)
-        except Exception:
-            pass  # un item defaillant ne doit pas bloquer l agregation des autres
+        except Exception:  # nosec B110 - un item defaillant ne doit pas bloquer l agregation des autres
+            pass  # nosec B110
         finally:
             if os.path.exists(nc_path):
                 try:
                     os.remove(nc_path)
-                except OSError:
-                    pass
+                except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                    pass  # nosec B110
             if pulse_callback:
                 pulse_callback()
 

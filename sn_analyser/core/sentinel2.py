@@ -186,8 +186,8 @@ def telecharger_composite_s2(bbox, annee, chemin_sortie, resolution=10, max_date
         for f in (tl, tw):
             try:
                 os.remove(f)
-            except OSError:
-                pass
+            except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+                pass  # nosec B110
     except Exception as exc:
         erreurs.append(("thermique Landsat", repr(exc)))
         th = np.zeros((hauteur, largeur), dtype=np.int32)

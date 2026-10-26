@@ -19,6 +19,7 @@ se terminant hier, pour comparer des cumuls sur une duree toujours egale
 import json
 import datetime
 import urllib.request
+from .utils import ouvrir_url
 import urllib.parse
 
 API_URL = "https://archive-api.open-meteo.com/v1/archive"
@@ -53,7 +54,7 @@ def recuperer_precipitation_annuelle(lat, lon, annee, timeout=20):
     url = API_URL + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"User-Agent": "SnAnalyser/1.0"})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        with ouvrir_url(req, timeout=timeout) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         valeurs = data.get("daily", {}).get("precipitation_sum", [])
         valeurs = [v for v in valeurs if v is not None]
@@ -88,7 +89,7 @@ def calculer_climatologie_precipitation(lat, lon, annee_reference_fin, nb_annees
     url = API_URL + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"User-Agent": "SnAnalyser/1.0"})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        with ouvrir_url(req, timeout=timeout) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         dates = data.get("daily", {}).get("time", [])
         valeurs = data.get("daily", {}).get("precipitation_sum", [])
@@ -169,7 +170,7 @@ def recuperer_climat_complementaire_annuel(lat, lon, annee, timeout=20):
     url = API_URL + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"User-Agent": "SnAnalyser/1.0"})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        with ouvrir_url(req, timeout=timeout) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         daily = data.get("daily", {})
         vent = [v for v in daily.get("windspeed_10m_max", []) if v is not None]

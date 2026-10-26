@@ -19,6 +19,7 @@ Deux composantes :
 import json
 import math
 import urllib.request
+from .utils import ouvrir_url
 import urllib.parse
 
 from .utils import clip_raster_to_geometry, moyenne_raster
@@ -164,7 +165,7 @@ def distance_industrie_proche(lat_centroide, lon_centroide, rayon_recherche_km=2
         try:
             data = urllib.parse.urlencode({"data": requete}).encode("utf-8")
             req = urllib.request.Request(url, data=data, headers={"User-Agent": "SnAnalyser/1.0"})
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with ouvrir_url(req, timeout=timeout) as resp:
                 resultat = json.loads(resp.read().decode("utf-8"))
             break
         except Exception:
@@ -234,11 +235,11 @@ def _distance_min_requete_overpass(requete, lat_centroide, lon_centroide):
         try:
             data = urllib.parse.urlencode({"data": requete}).encode("utf-8")
             req = urllib.request.Request(url, data=data, headers={"User-Agent": "SnAnalyser/1.0"})
-            with urllib.request.urlopen(req, timeout=45) as resp:
+            with ouvrir_url(req, timeout=45) as resp:
                 resultat = json.loads(resp.read().decode("utf-8"))
             break
-        except Exception:
-            continue
+        except Exception:  # nosec B112 - erreur non bloquante, ignoree volontairement
+            continue  # nosec B112
 
     if resultat is None:
         return None
@@ -285,8 +286,8 @@ def _requete_overpass_around(categories, lat_centroide, lon_centroide,
         try:
             data = urllib.parse.urlencode({"data": requete}).encode("utf-8")
             req = urllib.request.Request(url, data=data, headers={"User-Agent": "SnAnalyser/1.0"})
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with ouvrir_url(req, timeout=timeout) as resp:
                 return json.loads(resp.read().decode("utf-8"))
-        except Exception:
-            continue
+        except Exception:  # nosec B112 - erreur non bloquante, ignoree volontairement
+            continue  # nosec B112
     return None

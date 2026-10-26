@@ -73,8 +73,8 @@ def telecharger_mnt(bbox, chemin_sortie, resolution=30, marge_deg=0.0):
               creationOptions=["COMPRESS=DEFLATE", "TILED=YES"])
     try:
         os.remove(vrt)
-    except OSError:
-        pass
+    except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+        pass  # nosec B110
     return chemin_sortie
 
 
@@ -457,8 +457,8 @@ def exutoires_principaux(accumulation_tif, geojson_path, work_dir, prefix, resol
     ds = None
     try:
         os.remove(clip)
-    except OSError:
-        pass
+    except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+        pass  # nosec B110
     a[(a == -9999) | ~np.isfinite(a)] = 0
     a = np.abs(a)
     if a.max() <= 0:
@@ -539,8 +539,8 @@ def bassins_mghydro(exutoires, geojson_path, work_dir, prefix):
             try:
                 g = ogr.CreateGeometryFromJson(json.dumps(feat["geometry"]))
                 aire = float(feat["properties"].get("area_km2") or 0)
-            except Exception:
-                continue
+            except Exception:  # nosec B112 - erreur non bloquante, ignoree volontairement
+                continue  # nosec B112
             if g is not None:
                 polys.append((aire, g, feat, lat, lng))
     polys.sort(key=lambda t: -t[0])

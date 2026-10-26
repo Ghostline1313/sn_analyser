@@ -131,3 +131,14 @@ def lire_raster(raster_path, nodata=0.0):
 
     masque_valide = np.isfinite(arr) & (arr != nodata)
     return arr, geotransform, projection, masque_valide
+
+
+def ouvrir_url(req, timeout=30):
+    """urllib.request.urlopen limite au protocole HTTPS (aucun file:// ni
+    schema personnalise : toutes les URL du plugin sont des services web
+    publics en https)."""
+    import urllib.request
+    url = getattr(req, "full_url", req)
+    if not str(url).lower().startswith("https://"):
+        raise ValueError("URL non autorisee (https requis) : " + str(url)[:80])
+    return urllib.request.urlopen(req, timeout=timeout)  # nosec B310 - schema https verifie ci-dessus

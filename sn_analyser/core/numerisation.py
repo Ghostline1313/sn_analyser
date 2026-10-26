@@ -276,8 +276,8 @@ def _geom_relation(el, ogr):
             poly = ogr.BuildPolygonFromEdges(exterieurs, 0, 1, 1e-7)
             if poly is not None and not poly.IsEmpty():
                 return poly, "polygones"
-        except Exception:
-            pass
+        except Exception:  # nosec B110 - erreur non bloquante, ignoree volontairement
+            pass  # nosec B110
     multi = ogr.Geometry(ogr.wkbMultiLineString)
     for m in membres:
         ls = ogr.Geometry(ogr.wkbLineString)
@@ -345,8 +345,8 @@ def extraire(data, cles, geojson_zone, sortie_gpkg, journal=None):
             except Exception:
                 try:
                     gz = g.Buffer(0).Intersection(zone)
-                except Exception:
-                    continue
+                except Exception:  # nosec B112 - erreur non bloquante, ignoree volontairement
+                    continue  # nosec B112
             if gz is None or gz.IsEmpty():
                 continue
             seaux.setdefault((cle, nature), []).append((el, tags, gz))

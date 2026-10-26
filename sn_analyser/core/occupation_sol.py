@@ -108,8 +108,8 @@ def occupation_du_sol(bbox, geojson_path, geotransform, projection, forme, work_
     for f in (vrt, aligne, natif):
         try:
             os.remove(f)
-        except OSError:
-            pass
+        except OSError:  # nosec B110 - erreur non bloquante, ignoree volontairement
+            pass  # nosec B110
 
     return {"classes": classes, "fractions": fractions, "version": version,
             "source": "ESA WorldCover 10 m " + version}

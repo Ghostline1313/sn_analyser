@@ -16,6 +16,7 @@ deja a 5 composantes (IDT/IU/IC/IV/IP).
 import json
 import math
 import urllib.request
+from .utils import ouvrir_url
 import urllib.parse
 
 OVERPASS_MIRRORS = [
@@ -59,11 +60,11 @@ def zone_protegee_proche(lat_centroide, lon_centroide, rayon_recherche_km=10, ti
         try:
             data = urllib.parse.urlencode({"data": requete}).encode("utf-8")
             req = urllib.request.Request(url, data=data, headers={"User-Agent": "SnAnalyser/1.0"})
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with ouvrir_url(req, timeout=timeout) as resp:
                 resultat = json.loads(resp.read().decode("utf-8"))
             break
-        except Exception:
-            continue
+        except Exception:  # nosec B112 - erreur non bloquante, ignoree volontairement
+            continue  # nosec B112
     if resultat is None:
         return False, None, None
 
